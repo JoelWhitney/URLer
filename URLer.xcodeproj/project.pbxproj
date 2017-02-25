@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		E52069871E5BB3E7005C8BF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */; };
-		E52069891E5BB3E7005C8BF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52069881E5BB3E7005C8BF0 /* ViewController.swift */; };
+		E52069891E5BB3E7005C8BF0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52069881E5BB3E7005C8BF0 /* MainViewController.swift */; };
 		E520698C1E5BB3E7005C8BF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E520698A1E5BB3E7005C8BF0 /* Main.storyboard */; };
 		E520698E1E5BB3E7005C8BF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E520698D1E5BB3E7005C8BF0 /* Assets.xcassets */; };
 		E52069911E5BB3E7005C8BF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E520698F1E5BB3E7005C8BF0 /* LaunchScreen.storyboard */; };
 		E520699C1E5BB3E7005C8BF0 /* URLerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520699B1E5BB3E7005C8BF0 /* URLerTests.swift */; };
 		E52069A71E5BB3E7005C8BF0 /* URLerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52069A61E5BB3E7005C8BF0 /* URLerUITests.swift */; };
+		E5B0235B1E5E4D0E00BF0B56 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0235A1E5E4D0E00BF0B56 /* DetailsViewController.swift */; };
+		E5B0235D1E5E4E6900BF0B56 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0235C1E5E4E6900BF0B56 /* ItemsViewController.swift */; };
+		E5B023611E5E6A4800BF0B56 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0235E1E5E6A4800BF0B56 /* ImageStore.swift */; };
+		E5B023621E5E6A4800BF0B56 /* ItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0235F1E5E6A4800BF0B56 /* ItemStore.swift */; };
+		E5B023631E5E6A4800BF0B56 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B023601E5E6A4800BF0B56 /* Item.swift */; };
+		E5B023661E5E7B2700BF0B56 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B023641E5E7B2700BF0B56 /* ItemCell.swift */; };
+		E5B023671E5E7B2700BF0B56 /* BasicItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B023651E5E7B2700BF0B56 /* BasicItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +43,7 @@
 /* Begin PBXFileReference section */
 		E52069831E5BB3E7005C8BF0 /* URLer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E52069881E5BB3E7005C8BF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E52069881E5BB3E7005C8BF0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E520698B1E5BB3E7005C8BF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E520698D1E5BB3E7005C8BF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E52069901E5BB3E7005C8BF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +54,13 @@
 		E52069A21E5BB3E7005C8BF0 /* URLerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52069A61E5BB3E7005C8BF0 /* URLerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLerUITests.swift; sourceTree = "<group>"; };
 		E52069A81E5BB3E7005C8BF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5B0235A1E5E4D0E00BF0B56 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		E5B0235C1E5E4E6900BF0B56 /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
+		E5B0235E1E5E6A4800BF0B56 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		E5B0235F1E5E6A4800BF0B56 /* ItemStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemStore.swift; sourceTree = "<group>"; };
+		E5B023601E5E6A4800BF0B56 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		E5B023641E5E7B2700BF0B56 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		E5B023651E5E7B2700BF0B56 /* BasicItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +112,14 @@
 			isa = PBXGroup;
 			children = (
 				E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */,
-				E52069881E5BB3E7005C8BF0 /* ViewController.swift */,
+				E5B0235E1E5E6A4800BF0B56 /* ImageStore.swift */,
+				E5B0235F1E5E6A4800BF0B56 /* ItemStore.swift */,
+				E5B023601E5E6A4800BF0B56 /* Item.swift */,
+				E52069881E5BB3E7005C8BF0 /* MainViewController.swift */,
+				E5B0235A1E5E4D0E00BF0B56 /* DetailsViewController.swift */,
+				E5B023641E5E7B2700BF0B56 /* ItemCell.swift */,
+				E5B023651E5E7B2700BF0B56 /* BasicItemCell.swift */,
+				E5B0235C1E5E4E6900BF0B56 /* ItemsViewController.swift */,
 				E520698A1E5BB3E7005C8BF0 /* Main.storyboard */,
 				E520698D1E5BB3E7005C8BF0 /* Assets.xcassets */,
 				E520698F1E5BB3E7005C8BF0 /* LaunchScreen.storyboard */,
@@ -193,6 +214,7 @@
 				TargetAttributes = {
 					E52069821E5BB3E7005C8BF0 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = G2M9HLHRY3;
 						ProvisioningStyle = Automatic;
 					};
 					E52069961E5BB3E7005C8BF0 = {
@@ -259,8 +281,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E52069891E5BB3E7005C8BF0 /* ViewController.swift in Sources */,
+				E5B023661E5E7B2700BF0B56 /* ItemCell.swift in Sources */,
+				E52069891E5BB3E7005C8BF0 /* MainViewController.swift in Sources */,
+				E5B0235D1E5E4E6900BF0B56 /* ItemsViewController.swift in Sources */,
+				E5B023621E5E6A4800BF0B56 /* ItemStore.swift in Sources */,
 				E52069871E5BB3E7005C8BF0 /* AppDelegate.swift in Sources */,
+				E5B023631E5E6A4800BF0B56 /* Item.swift in Sources */,
+				E5B023671E5E7B2700BF0B56 /* BasicItemCell.swift in Sources */,
+				E5B023611E5E6A4800BF0B56 /* ImageStore.swift in Sources */,
+				E5B0235B1E5E4D0E00BF0B56 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +441,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = G2M9HLHRY3;
 				INFOPLIST_FILE = URLer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JoelWhitney.URLer;
@@ -424,6 +455,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = G2M9HLHRY3;
 				INFOPLIST_FILE = URLer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JoelWhitney.URLer;
@@ -505,6 +538,7 @@
 				E52069AD1E5BB3E7005C8BF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E52069AE1E5BB3E7005C8BF0 /* Build configuration list for PBXNativeTarget "URLerTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +547,7 @@
 				E52069B01E5BB3E7005C8BF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E52069B11E5BB3E7005C8BF0 /* Build configuration list for PBXNativeTarget "URLerUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +556,7 @@
 				E52069B31E5BB3E7005C8BF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
