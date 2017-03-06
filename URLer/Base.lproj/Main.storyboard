@@ -66,7 +66,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="top" bounces="NO" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fpb-7F-7XE">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="top" bounces="NO" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fpb-7F-7XE" customClass="CodeTextView" customModule="URLer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="592" width="375" height="75"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -77,7 +77,7 @@
                                     <constraint firstAttribute="height" constant="75" id="OGt-l1-kO1"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="No code detected">
+                                    <fragment content="Scan valid ArcGIS URL">
                                         <attributes>
                                             <color key="NSColor" red="0.04741089791059494" green="0.1381879448890686" blue="0.092970304191112518" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="18" name="AvenirNext-Regular"/>
@@ -97,10 +97,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="URLer" id="3XG-Js-wtE">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="V4w-XK-5CL"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="TEG-ah-SmW">
+                        <barButtonItem key="backBarButtonItem" title="Scan" id="V4w-XK-5CL"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="TEG-ah-SmW">
                             <connections>
-                                <segue destination="9eM-K1-ivj" kind="unwind" unwindAction="unwindToHomeScreenWithSegue:" id="noS-cE-1k4"/>
+                                <action selector="refreshButton:" destination="xhL-v3-QPO" id="gxV-sg-Azz"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="h6d-AS-JK1">
@@ -114,7 +114,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6o5-m9-LAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="9eM-K1-ivj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1520.8" y="77.811094452773617"/>
         </scene>
