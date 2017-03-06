@@ -103,6 +103,7 @@ class RecentsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
+        navigationItem.title = "Recent URLs"
     }
     
     override func viewWillAppear(_ animated: Bool) {
