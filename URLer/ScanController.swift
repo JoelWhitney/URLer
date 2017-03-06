@@ -14,10 +14,11 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     // MARK: - Variables and constants
     // variables
     @IBOutlet var messageLabel:UITextView!
-    @IBOutlet var topbar: UIView!
+    
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
     var qrCodeFrameView:UIView?
+    var codeStringValue: String = ""
     // constants
     let supportedCodeTypes = [AVMetadataObjectTypeUPCECode,
                               AVMetadataObjectTypeCode39Code,
@@ -29,7 +30,8 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                               AVMetadataObjectTypeAztecCode,
                               AVMetadataObjectTypePDF417Code,
                               AVMetadataObjectTypeQRCode]
-    let supportedIdentifiers = ["arcgis-explorer", "arcgis-navigator", "argis-workforce", "arcgis-survey123", "arcgis-collector"]
+    let supportedIdentifiers = ["arcgis-explorer", "arcgis-navigator",
+                                "argis-workforce", "arcgis-survey123", "arcgis-collector"]
     // MARK: - Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +49,10 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession = AVCaptureSession()
             captureSession?.addInput(input)
             // initialize a output object to capture session
-            let captureMetadataOutput = AVCaptureMetadataOutput()
-            captureSession?.addOutput(captureMetadataOutput)
-            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = supportedCodeTypes
+            let results = AVCaptureMetadataOutput()
+            captureSession?.addOutput(results)
+            results.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            results.metadataObjectTypes = supportedCodeTypes
             // initialize the video preview layer and add to view as sublayer
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -59,13 +61,18 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             // start capture session and move labels to front
             captureSession?.startRunning()
             view.bringSubview(toFront: messageLabel)
-            view.bringSubview(toFront: topbar)
         } catch {
             // print errors thrown by AVCaptureDeviceInput
             print(error)
             return
         }
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     // recognize and place frame around code
     func qrCodeFrame() {
         qrCodeFrameView = UIView()
@@ -76,47 +83,57 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             view.bringSubview(toFront: qrCodeFrameView)
         }
     }
+    // make sure app-id is supported
+    func checkAppID(codeText code: String) -> Bool {
+        let codeArray = code.characters.split {$0 == ":"}
+        let app = codeArray.map(String.init)[0] // → ["arcgis-explorer", "//"]
+        if supportedIdentifiers.contains(app), code != codeStringValue {
+            return true
+        } else {
+            return false
+        }
+    }
     // delegate method to handle output
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputresults results: [Any]!, from connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects results: [Any]!, from connection: AVCaptureConnection!) {
         // check results
         if results == nil || results.count == 0 {
-            qrCodeFrameView?.frame = CGRect.zero
-            let urlString = NSMutableAttributedString(string: "No valid code is detected")
-            let attributedString = NSMutableAttributedString(string: urlString.string)
-            messageLabel.attributedText = attributedString
-            return
-        }
-        // get first result
-        let metadataObj = results[0] as! AVMetadataMachineReadableCodeObject
-        print(metadataObj)
-        print(metadataObj.type)
-        // check to make sure supported type
-        if supportedCodeTypes.contains(metadataObj.type) {
-            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
-            qrCodeFrameView?.frame = barCodeObject!.bounds
-            // verify not empty or nil
-            if metadataObj.stringValue != nil, !metadataObj.stringValue.isEmpty {
-                guard let attributedString = checkAppID(codeText: metadataObj.stringValue) else {
-                    return
-                }
-                // Format textView
-//                let linkAttributes = [ NSForegroundColorAttributeName: UIColor.red.cgColor]
-//                messageLabel.linkTextAttributes = linkAttributes
-                // Assign url to textView
-                messageLabel.dataDetectorTypes = .link
-                messageLabel.isEditable = false
+            if !codeStringValue.isEmpty {
+                let attributedString = NSMutableAttributedString(string: codeStringValue)
                 messageLabel.attributedText = attributedString
+                return
+            } else {
+                qrCodeFrameView?.frame = CGRect.zero
+                let urlString = NSMutableAttributedString(string: "No valid code is detected")
+                let attributedString = NSMutableAttributedString(string: urlString.string)
+                messageLabel.attributedText = attributedString
+                return
+            }
+        } else {
+            // get first result
+            let metadataObj = results[0] as! AVMetadataMachineReadableCodeObject
+            print(metadataObj)
+            print(metadataObj.type)
+            // check to make sure supported type
+            if supportedCodeTypes.contains(metadataObj.type) {
+                let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+                qrCodeFrameView?.frame = barCodeObject!.bounds
+                // verify not empty or nil
+                if !metadataObj.stringValue.isEmpty, checkAppID(codeText: metadataObj.stringValue){
+                    captureSession?.stopRunning()
+                    UIApplication.shared.open(URL(string: metadataObj.stringValue)!)
+                } else {
+                    let urlString = NSMutableAttributedString(string: "No valid code is detected")
+                    let attributedString = NSMutableAttributedString(string: urlString.string)
+                    messageLabel.attributedText = attributedString
+                }
+                return
             }
         }
     }
-    // make sure app-id is supported
-    func checkAppID(codeText code: String) -> NSMutableAttributedString? {
-        let codeArray = code.characters.split {$0 == ":"}
-        let app = codeArray.map(String.init)[0] // → ["arcgis-explorer", "//"]
-        if supportedIdentifiers.contains(app) {
-            return NSMutableAttributedString(string: code)
-        } else {
-            return nil
-        }
+    
+    func saveCode(codeText code: String) {
+    
     }
+    
+    
 }
