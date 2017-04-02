@@ -16,23 +16,16 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>arcgis-collector</string>
-				<string>arcgis-navigator</string>
-				<string>arcgis-workforce</string>
-				<string>arcgis-survey123</string>
-				<string>arcgis-explorer</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>arcgis-collector</string>
+		<string>arcgis-workforce</string>
+		<string>arcgis-survey123</string>
+		<string>arcgis-explorer</string>
+		<string>arcgis-navigator</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>

@@ -28,19 +28,11 @@
                                 <size key="titleShadowOffset" width="15" height="15"/>
                                 <state key="normal" image="URLerButton"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URLer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwh-ua-O5H">
-                                <rect key="frame" x="119" y="245" width="137" height="59"/>
-                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="51"/>
-                                <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Bwh-ua-O5H" firstAttribute="centerX" secondItem="KjU-XM-94O" secondAttribute="centerX" id="2kF-Fb-0u5"/>
                             <constraint firstItem="off-yY-TKb" firstAttribute="centerX" secondItem="KjU-XM-94O" secondAttribute="centerX" id="Tgw-3N-olQ"/>
                             <constraint firstItem="off-yY-TKb" firstAttribute="centerY" secondItem="KjU-XM-94O" secondAttribute="centerY" id="Umz-8E-dr5"/>
-                            <constraint firstItem="off-yY-TKb" firstAttribute="top" secondItem="Bwh-ua-O5H" secondAttribute="bottom" id="fs2-j7-VUU"/>
                         </constraints>
                     </view>
                 </viewController>

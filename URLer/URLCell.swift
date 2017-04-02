@@ -9,10 +9,9 @@
 import UIKit
 
 class URLCell: UITableViewCell {
-    @IBOutlet var urlLabel: UILabel!
+    @IBOutlet var url: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        urlLabel.adjustsFontForContentSizeCategory = true
     }
 }

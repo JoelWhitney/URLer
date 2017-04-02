@@ -14,6 +14,8 @@
 		E520699C1E5BB3E7005C8BF0 /* URLerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E520699B1E5BB3E7005C8BF0 /* URLerTests.swift */; };
 		E52069A71E5BB3E7005C8BF0 /* URLerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52069A61E5BB3E7005C8BF0 /* URLerUITests.swift */; };
 		E531DCAE1E6CEB3200A93F80 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E531DCAC1E6CEB3200A93F80 /* MainViewController.swift */; };
+		E531DCB21E6E820C00A93F80 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E531DCB11E6E820C00A93F80 /* NavigationController.swift */; };
+		E5539D1B1E75F0A000CC029E /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5539D1A1E75F0A000CC029E /* AboutController.swift */; };
 		E5BA95BB1E628F65008665B8 /* ScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BA95BA1E628F65008665B8 /* ScanController.swift */; };
 		E5D103261E6C3B8100E95766 /* URLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D103251E6C3B8100E95766 /* URLCell.swift */; };
 		E5D103281E6C3D9100E95766 /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D103271E6C3D9100E95766 /* RecentsViewController.swift */; };
@@ -53,6 +55,8 @@
 		E52069A61E5BB3E7005C8BF0 /* URLerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLerUITests.swift; sourceTree = "<group>"; };
 		E52069A81E5BB3E7005C8BF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E531DCAC1E6CEB3200A93F80 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E531DCB11E6E820C00A93F80 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		E5539D1A1E75F0A000CC029E /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		E5BA95BA1E628F65008665B8 /* ScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanController.swift; sourceTree = "<group>"; };
 		E5D103251E6C3B8100E95766 /* URLCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCell.swift; sourceTree = "<group>"; };
 		E5D103271E6C3D9100E95766 /* RecentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
@@ -110,14 +114,16 @@
 			isa = PBXGroup;
 			children = (
 				E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */,
+				E5D103271E6C3D9100E95766 /* RecentsViewController.swift */,
 				E5BA95BA1E628F65008665B8 /* ScanController.swift */,
+				E5539D1A1E75F0A000CC029E /* AboutController.swift */,
 				E520698A1E5BB3E7005C8BF0 /* Main.storyboard */,
 				E520698D1E5BB3E7005C8BF0 /* Assets.xcassets */,
 				E520698F1E5BB3E7005C8BF0 /* LaunchScreen.storyboard */,
 				E531DCAC1E6CEB3200A93F80 /* MainViewController.swift */,
 				E52069921E5BB3E7005C8BF0 /* Info.plist */,
-				E5D103271E6C3D9100E95766 /* RecentsViewController.swift */,
 				E5D103251E6C3B8100E95766 /* URLCell.swift */,
+				E531DCB11E6E820C00A93F80 /* NavigationController.swift */,
 				E5D1032F1E6C4AA200E95766 /* LastCell.swift */,
 				E5D1032B1E6C3DBB00E95766 /* URLItem.swift */,
 				E5D1032D1E6C3DC200E95766 /* URLItemStore.swift */,
@@ -211,7 +217,7 @@
 				TargetAttributes = {
 					E52069821E5BB3E7005C8BF0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = G2M9HLHRY3;
+						DevelopmentTeam = NJ4VVCSZ7F;
 						ProvisioningStyle = Automatic;
 					};
 					E52069961E5BB3E7005C8BF0 = {
@@ -279,9 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5D103281E6C3D9100E95766 /* RecentsViewController.swift in Sources */,
+				E5539D1B1E75F0A000CC029E /* AboutController.swift in Sources */,
 				E52069871E5BB3E7005C8BF0 /* AppDelegate.swift in Sources */,
 				E5BA95BB1E628F65008665B8 /* ScanController.swift in Sources */,
 				E5D1032C1E6C3DBB00E95766 /* URLItem.swift in Sources */,
+				E531DCB21E6E820C00A93F80 /* NavigationController.swift in Sources */,
 				E5D103301E6C4AA200E95766 /* LastCell.swift in Sources */,
 				E531DCAE1E6CEB3200A93F80 /* MainViewController.swift in Sources */,
 				E5D103261E6C3B8100E95766 /* URLCell.swift in Sources */,
@@ -438,10 +446,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = G2M9HLHRY3;
+				DEVELOPMENT_TEAM = NJ4VVCSZ7F;
 				INFOPLIST_FILE = URLer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JoelWhitney.URLer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esri.URLer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -452,10 +460,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = G2M9HLHRY3;
+				DEVELOPMENT_TEAM = NJ4VVCSZ7F;
 				INFOPLIST_FILE = URLer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JoelWhitney.URLer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.esri.URLer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

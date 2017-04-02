@@ -10,17 +10,18 @@ import UIKit
 import AVFoundation
 
 class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
-    
-    // MARK: - Variables and constants
-    // variables
-    @IBOutlet var messageLabel:UITextView!
+    // MARK: - variables/constants
+    @IBOutlet var messageLabel: UITextView!
     var messageLabelFont: UIFont?
-    var captureSession:AVCaptureSession?
-    var videoPreviewLayer:AVCaptureVideoPreviewLayer?
-    var qrCodeFrameView:UIView?
-    var codeStringValue: String = ""
+    var captureSession: AVCaptureSession?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var qrCodeFrameView: UIView?
+    var prevCodeStringvalue: String = ""
+    var itemStore: URLItemStore {
+        let navController = self.navigationController as? NavigationController
+        return navController!.itemStore
+    }
     
-    // constants
     let supportedCodeTypes = [AVMetadataObjectTypeUPCECode,
                               AVMetadataObjectTypeCode39Code,
                               AVMetadataObjectTypeCode39Mod43Code,
@@ -31,36 +32,29 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                               AVMetadataObjectTypeAztecCode,
                               AVMetadataObjectTypePDF417Code,
                               AVMetadataObjectTypeQRCode]
-    let supportedIdentifiers = ["arcgis-explorer", "arcgis-navigator",
-                                "argis-workforce", "arcgis-survey123", "arcgis-collector"]
-    // MARK: - Override functions
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
-        messageLabelFont = messageLabel.font
-        messageLabel.textAlignment = .center
-        self.videoPreviewFrame()
-        self.qrCodeFrame()
-    }
+    let supportedIdentifiers = Bundle.main.infoDictionary?["LSApplicationQueriesSchemes"] as? [String] ?? []
     
+    // MARK: - actions
     @IBAction func refreshButton(_ sender: UIBarButtonItem) {
-        refreshScanController()
+        refreshScanControllerState()
     }
     
-    func refreshScanController() {
-        captureSession?.startRunning()
-        qrCodeFrameView?.frame = CGRect.zero
-        let urlString = NSMutableAttributedString(string: "Scan valid ArcGIS URL")
-        let attributedString = NSMutableAttributedString(string: urlString.string)
+    // MARK: - class methods
+    func setMessageLabel(attributedString: NSMutableAttributedString) {
         messageLabel.attributedText = attributedString
         messageLabel.font = messageLabelFont
         messageLabel.textAlignment = .center
+        messageLabel.isUserInteractionEnabled = false
+        messageLabel.accessibilityIdentifier = "code_text"
     }
-    
-    // MARK: - Class methods
-    // start video preview frame
+    func refreshScanControllerState() {
+        captureSession?.startRunning()
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
+        qrCodeFrameView?.frame = CGRect.zero
+        let urlString = NSMutableAttributedString(string: "Scan valid ArcGIS URL")
+        setMessageLabel(attributedString: NSMutableAttributedString(string: urlString.string))
+    }
     func videoPreviewFrame() {
-        // set-up cature device
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
             // initialize the captureSession object and add input
@@ -82,88 +76,88 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             view.bringSubview(toFront: messageLabel)
         } catch {
             // print errors thrown by AVCaptureDeviceInput
-            print(error)
+            print("Error setting up preview frame: \(error)")
             return
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // recognize and place frame around code
-    func qrCodeFrame() {
+    func captureDetectionFrame() {
         qrCodeFrameView = UIView()
         if let qrCodeFrameView = qrCodeFrameView {
-            qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            qrCodeFrameView.layer.borderColor = UIColor.white.cgColor
             qrCodeFrameView.layer.borderWidth = 2
             view.addSubview(qrCodeFrameView)
             view.bringSubview(toFront: qrCodeFrameView)
         }
     }
-    // make sure app-id is supported
-    func checkAppID(codeText code: String) -> Bool {
-        let codeArray = code.characters.split {$0 == ":"}
-        let app = codeArray.map(String.init)[0] // → ["arcgis-explorer", "//"]
-        if supportedIdentifiers.contains(app), code != codeStringValue {
+    func verifyApplicationID(url: String) -> Bool {
+        let urlSplit = url.characters.split {$0 == ":"}
+        let app = urlSplit.map(String.init)[0] // → ["arcgis-explorer", "//"]
+        if supportedIdentifiers.contains(app) {
             return true
         } else {
             return false
         }
     }
-    // delegate method to handle output
-    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects results: [Any]!, from connection: AVCaptureConnection!) {
-        // check results
-        if results == nil || results.count == 0 {
-            if !codeStringValue.isEmpty {
-                let attributedString = NSMutableAttributedString(string: codeStringValue)
-                messageLabel.attributedText = attributedString
-                messageLabel.font = messageLabelFont
-                return
-            } else {
-                qrCodeFrameView?.frame = CGRect.zero
-                let urlString = NSMutableAttributedString(string: "Code is not valid ArcGIS URL")
-                let attributedString = NSMutableAttributedString(string: urlString.string)
-                messageLabel.attributedText = attributedString
-                messageLabel.font = messageLabelFont
-                messageLabel.textAlignment = .center
-
+    func saveIntoRecents(url: URL) {
+        var index = 0
+        for item in itemStore.allItems {
+            if item.url == url {
+                itemStore.moveItem(fromIndex: index, to: 0)
                 return
             }
+            index += 1
+        }
+        itemStore.addItem(url: url)
+    }
+    
+    // MARK: - delegate methods
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects results: [Any]!, from connection: AVCaptureConnection!) {
+        if results == nil || results.count == 0 { // handle empty results
+            qrCodeFrameView?.frame = CGRect.zero
+            let urlString = NSMutableAttributedString(string: "Code is not valid ArcGIS URL")
+            setMessageLabel(attributedString: NSMutableAttributedString(string: urlString.string))
+            return
         } else {
-            // get first result
             let metadataObj = results[0] as! AVMetadataMachineReadableCodeObject
-            print(metadataObj)
-            print(metadataObj.type)
-            // check to make sure supported type
-            if supportedCodeTypes.contains(metadataObj.type) {
+            if supportedCodeTypes.contains(metadataObj.type) { // handle output type
                 let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
                 qrCodeFrameView?.frame = barCodeObject!.bounds
-                // verify not empty or nil
-                if !metadataObj.stringValue.isEmpty, checkAppID(codeText: metadataObj.stringValue){
+                if !metadataObj.stringValue.isEmpty, verifyApplicationID(url: metadataObj.stringValue) { // handle result contents
                     captureSession?.stopRunning()
+                    self.navigationItem.leftBarButtonItem?.isEnabled = true
                     let attributedString = NSMutableAttributedString(string: metadataObj.stringValue)
                     messageLabel.attributedText = attributedString
+                    messageLabel.isUserInteractionEnabled = true
+                    if UIApplication.shared.canOpenURL(URL(string: metadataObj.stringValue)!) { // only save if app is installed
+                        saveIntoRecents(url: URL(string: metadataObj.stringValue)!)
+                    }
                 } else {
                     let urlString = NSMutableAttributedString(string: "Code is not valid ArcGIS URL")
-                    let attributedString = NSMutableAttributedString(string: urlString.string)
-                    messageLabel.attributedText = attributedString
-                    messageLabel.font = messageLabelFont
-                    messageLabel.textAlignment = .center
-
+                    setMessageLabel(attributedString: NSMutableAttributedString(string: urlString.string))
                 }
                 return
             }
         }
     }
-    
-    func saveCode(codeText code: String) {
-        
+
+    // MARK: - view transition overrides
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
+        messageLabelFont = messageLabel.font
+        messageLabel.textAlignment = .center
+        self.videoPreviewFrame()
+        self.captureDetectionFrame()
+        self.navigationItem.leftBarButtonItem?.isEnabled = false
     }
     override func viewWillAppear(_ animated: Bool) {
         print("ScanController will appear")
-        refreshScanController()
+        navigationController?.setToolbarHidden(true, animated: true)
+        refreshScanControllerState()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        itemStore.saveChanges()
     }
     
     

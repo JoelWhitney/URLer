@@ -9,9 +9,21 @@
 import UIKit
 
 class RecentsViewController: UITableViewController {
+    // MARK: - variables/constants
+    var itemStore: URLItemStore {
+        let navController = self.navigationController as? NavigationController
+        return navController!.itemStore
+    }
+    var alertTextField = UITextField()
+    let supportedIdentifiers = Bundle.main.infoDictionary?["LSApplicationQueriesSchemes"] as? [String] ?? []
     
-    var itemStore: URLItemStore!
-
+    // MARK: - initializers
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
+    // MARK: - actions
     @IBAction func toggleEditingMode(_ sender: UIButton) {
         if isEditing {
             sender.setTitle("Edit", for: .normal)
@@ -21,25 +33,17 @@ class RecentsViewController: UITableViewController {
             setEditing(true, animated: true)
         }
     }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        navigationItem.rightBarButtonItem = editButtonItem
-    }
     
+    // MARK: - tableview stuff
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if itemStore == nil {
-            print("URLItemStore not initialized correctly in AppDelegate, so trying not to crash")
-            itemStore = URLItemStore()
-        }
         return itemStore.allItems.count + 1
     }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
         if indexPath.row < itemStore.allItems.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "URLCell", for: indexPath) as! URLCell
             let item = itemStore.allItems[indexPath.row]
-            cell.urlLabel.attributedText = NSMutableAttributedString(string: item.url.absoluteString)
+            cell.url.attributedText = NSMutableAttributedString(string: item.url.absoluteString)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LastCell", for: indexPath) as! LastCell
@@ -48,7 +52,7 @@ class RecentsViewController: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        itemStore.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        itemStore.moveItem(fromIndex: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         if proposedDestinationIndexPath.row == itemStore.allItems.count {
@@ -71,7 +75,6 @@ class RecentsViewController: UITableViewController {
             return true
         }
     }
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let item = itemStore.allItems[indexPath.row]
@@ -96,22 +99,86 @@ class RecentsViewController: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "Remove this junk"
+        return "Remove URL"
+    }
+
+    // MARK: - class methods
+    func addNewURL(sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Add URL", message: "Enter URL below", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addTextField(configurationHandler: configureTextField)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: handleCancel))
+        alert.addAction(UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler: handleAddURL))
+        self.present(alert, animated: true, completion: {
+            // do stuff
+        })
+    }
+    func clearURLs(sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Clear all URLs", message: "Are you sure you want to clear all URLs?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: handleCancel))
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: handleClearURLs))
+        self.present(alert, animated: true, completion: {
+            // do stuff
+        })
+    }
+    func configureTextField(alertTextField: UITextField?) {
+        if let textField = alertTextField {
+            self.alertTextField = textField // save reference to UITextField
+        }
+    }
+    func handleCancel(alertView: UIAlertAction!) {
+        // do cancel stuff here
+    }
+    func handleAddURL(alertView: UIAlertAction!) {
+        let newURL = self.alertTextField.text
+        if !(newURL?.isEmpty)!, verifyApplicationID(url: newURL!), UIApplication.shared.canOpenURL(URL(string: newURL!)!) {
+            // Create a new Item and add it to the store
+            let url = URL(string: newURL!)
+            itemStore.addItem(url: url!)
+            tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+
+        } else {
+            print("Bad new url")
+            let alertController = UIAlertController(title: "Error", message: "Application schema is not valid or application not installed", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    func handleClearURLs(alertView: UIAlertAction!) {
+        itemStore.removeAllItems()
+        tableView.reloadData()
+    }
+    func verifyApplicationID(url: String) -> Bool {
+        let urlSplit = url.characters.split {$0 == ":"}
+        let app = urlSplit.map(String.init)[0] // → ["arcgis-explorer", "//"]
+        if supportedIdentifiers.contains(app) {
+            return true
+        } else {
+            return false
+        }
     }
     
+    // MARK: - view transition overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 65
-        navigationItem.title = "Recent URLs"
+        tableView.estimatedRowHeight = 90
+        navigationItem.title = "Recents"
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        navigationController?.setToolbarHidden(false, animated: true)
+        var items = [UIBarButtonItem]()
+        items.append(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewURL(sender:))))
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+        items.append(UIBarButtonItem(title: "Clear All", style: .done, target: self, action: #selector(clearURLs(sender:))))
+        toolbarItems = items
         tableView.reloadData()
-        
-        print("RecentsViewController loading")
-        print(tableView.numberOfRows(inSection: 0))
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        itemStore.saveChanges()
     }
     
 }
