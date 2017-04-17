@@ -14,7 +14,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     @IBOutlet var messageLabel: UITextView!
     var messageLabelFont: UIFont?
     var captureSession: AVCaptureSession?
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var capturePreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
     var prevCodeStringvalue: String = ""
     var itemStore: URLItemStore {
@@ -54,7 +54,21 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         let urlString = NSMutableAttributedString(string: "Scan valid ArcGIS URL")
         setMessageLabel(attributedString: NSMutableAttributedString(string: urlString.string))
     }
-    func videoPreviewFrame() {
+    func capturePreviewFrame() {
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        let captureRectWidth = CGFloat(150.0)
+        let captureRectHeight = CGFloat(150.0)
+        
+        var cgCaptureRect = CGRect(x: (screenWidth / 2 - captureRectWidth / 2),
+                                   y: (screenHeight / 2 - captureRectHeight / 2),
+                                   width: captureRectWidth,
+                                   height: captureRectHeight)
+        
+        let captureWindowView = UIView()
+        captureWindowView.frame = cgCaptureRect
+        
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
             // initialize the captureSession object and add input
@@ -66,14 +80,28 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession?.addOutput(results)
             results.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             results.metadataObjectTypes = supportedCodeTypes
+
+
             // initialize the video preview layer and add to view as sublayer
-            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            videoPreviewLayer?.frame = view.layer.bounds
-            view.layer.addSublayer(videoPreviewLayer!)
+            capturePreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            capturePreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+            capturePreviewLayer?.frame = view.layer.bounds
+            view.layer.addSublayer(capturePreviewLayer!)
+            
             // start capture session and move labels to front
             captureSession?.startRunning()
             view.bringSubview(toFront: messageLabel)
+            
+            // set capture area
+            let captureRect = capturePreviewLayer?.metadataOutputRectOfInterest(for: cgCaptureRect)
+            results.rectOfInterest = captureRect!
+            captureWindowView.layer.backgroundColor = UIColor.clear.cgColor
+            captureWindowView.layer.borderColor = UIColor.lightGray.cgColor
+            captureWindowView.layer.borderWidth = 1
+            view.addSubview(captureWindowView)
+            view.bringSubview(toFront: captureWindowView)
+            
+
         } catch {
             // print errors thrown by AVCaptureDeviceInput
             print("Error setting up preview frame: \(error)")
@@ -120,7 +148,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         } else {
             let metadataObj = results[0] as! AVMetadataMachineReadableCodeObject
             if supportedCodeTypes.contains(metadataObj.type) { // handle output type
-                let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+                let barCodeObject = capturePreviewLayer?.transformedMetadataObject(for: metadataObj)
                 qrCodeFrameView?.frame = barCodeObject!.bounds
                 if !metadataObj.stringValue.isEmpty, verifyApplicationID(url: metadataObj.stringValue) { // handle result contents
                     captureSession?.stopRunning()
@@ -146,7 +174,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         self.automaticallyAdjustsScrollViewInsets = false
         messageLabelFont = messageLabel.font
         messageLabel.textAlignment = .center
-        self.videoPreviewFrame()
+        self.capturePreviewFrame()
         self.captureDetectionFrame()
         self.navigationItem.leftBarButtonItem?.isEnabled = false
     }
