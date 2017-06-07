@@ -150,21 +150,52 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             if supportedCodeTypes.contains(metadataObj.type) { // handle output type
                 let barCodeObject = capturePreviewLayer?.transformedMetadataObject(for: metadataObj)
                 qrCodeFrameView?.frame = barCodeObject!.bounds
-                if !metadataObj.stringValue.isEmpty, verifyApplicationID(url: metadataObj.stringValue) { // handle result contents
+                let urlString = metadataObj.stringValue.replacingOccurrences(of: " ", with: "")
+                print(urlString)
+                if !urlString.isEmpty, verifyApplicationID(url: urlString) { // handle result contents
                     captureSession?.stopRunning()
                     self.navigationItem.leftBarButtonItem?.isEnabled = true
-                    let attributedString = NSMutableAttributedString(string: metadataObj.stringValue)
+                    let attributedString = NSMutableAttributedString(string: urlString)
                     messageLabel.attributedText = attributedString
                     messageLabel.isUserInteractionEnabled = true
-                    if UIApplication.shared.canOpenURL(URL(string: metadataObj.stringValue)!) { // only save if app is installed
-                        saveIntoRecents(url: URL(string: metadataObj.stringValue)!)
+                    if UIApplication.shared.canOpenURL(URL(string: urlString)!) { // only save if app is installed
+                        saveIntoRecents(url: URL(string: urlString)!)
                     }
                 } else {
-                    let urlString = NSMutableAttributedString(string: "Code is not valid ArcGIS URL")
-                    setMessageLabel(attributedString: NSMutableAttributedString(string: urlString.string))
+                    let noUrlString = NSMutableAttributedString(string: "Code is not valid ArcGIS URL")
+                    setMessageLabel(attributedString: NSMutableAttributedString(string: noUrlString.string))
                 }
                 return
             }
+        }
+    }
+    
+    func checkInternalNetwork() {
+        let serverName:String = "ekotest.esri.com"
+        var numAddress:String = ""
+        
+        let host = CFHostCreateWithName(nil, serverName as CFString).takeRetainedValue()
+        CFHostStartInfoResolution(host, .addresses, nil)
+        var success: DarwinBoolean = false
+        if let addresses = CFHostGetAddressing(host, &success)?.takeUnretainedValue() as NSArray?,
+            let theAddress = addresses.firstObject as? NSData {
+            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+            if getnameinfo(theAddress.bytes.assumingMemoryBound(to: sockaddr.self), socklen_t(theAddress.length),
+                           &hostname, socklen_t(hostname.count), nil, 0, NI_NUMERICHOST) == 0 {
+                numAddress = String(cString: hostname)
+                print(numAddress)
+            }
+        }
+        
+        // if no access to appbuilder, only capature crash log, don't post
+        if numAddress != "" {
+            //  accessible to the server
+            print("Great SUCCESS")
+            self.navigationItem.leftBarButtonItems?[1].isEnabled = true
+            self.navigationItem.leftBarButtonItems?[1].tintColor = UIColor.white
+        } else {
+            self.navigationItem.leftBarButtonItems?[1].isEnabled = false
+            self.navigationItem.leftBarButtonItems?[1].tintColor = UIColor.clear
         }
     }
 
@@ -181,6 +212,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     override func viewWillAppear(_ animated: Bool) {
         print("ScanController will appear")
         navigationController?.setToolbarHidden(true, animated: true)
+        checkInternalNetwork()
         refreshScanControllerState()
     }
     override func viewWillDisappear(_ animated: Bool) {

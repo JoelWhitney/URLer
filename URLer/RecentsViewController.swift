@@ -132,9 +132,10 @@ class RecentsViewController: UITableViewController {
     }
     func handleAddURL(alertView: UIAlertAction!) {
         let newURL = self.alertTextField.text
-        if !(newURL?.isEmpty)!, verifyApplicationID(url: newURL!), UIApplication.shared.canOpenURL(URL(string: newURL!)!) {
+        let urlString = newURL?.replacingOccurrences(of: " ", with: "")
+        if !(urlString!.isEmpty), verifyApplicationID(url: urlString!), UIApplication.shared.canOpenURL(URL(string: urlString!)!) {
             // Create a new Item and add it to the store
-            let url = URL(string: newURL!)
+            let url = URL(string: urlString!)
             itemStore.addItem(url: url!)
             tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 

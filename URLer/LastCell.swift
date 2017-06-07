@@ -13,7 +13,11 @@ class LastCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        lastCellLabel.adjustsFontForContentSizeCategory = true
+        if #available(iOS 10.0, *) {
+            lastCellLabel.adjustsFontForContentSizeCategory = true
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
 }

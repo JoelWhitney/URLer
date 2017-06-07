@@ -22,6 +22,7 @@
 		E5D1032C1E6C3DBB00E95766 /* URLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D1032B1E6C3DBB00E95766 /* URLItem.swift */; };
 		E5D1032E1E6C3DC200E95766 /* URLItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D1032D1E6C3DC200E95766 /* URLItemStore.swift */; };
 		E5D103301E6C4AA200E95766 /* LastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D1032F1E6C4AA200E95766 /* LastCell.swift */; };
+		E5D898DB1EC0ECB00091A4DE /* DataFinderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D898DA1EC0ECB00091A4DE /* DataFinderController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		E5D1032B1E6C3DBB00E95766 /* URLItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLItem.swift; sourceTree = "<group>"; };
 		E5D1032D1E6C3DC200E95766 /* URLItemStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLItemStore.swift; sourceTree = "<group>"; };
 		E5D1032F1E6C4AA200E95766 /* LastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastCell.swift; sourceTree = "<group>"; };
+		E5D898DA1EC0ECB00091A4DE /* DataFinderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFinderController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */,
-				E5D103271E6C3D9100E95766 /* RecentsViewController.swift */,
 				E5BA95BA1E628F65008665B8 /* ScanController.swift */,
+				E5D898DA1EC0ECB00091A4DE /* DataFinderController.swift */,
+				E5D103271E6C3D9100E95766 /* RecentsViewController.swift */,
 				E5539D1A1E75F0A000CC029E /* AboutController.swift */,
 				E520698A1E5BB3E7005C8BF0 /* Main.storyboard */,
 				E520698D1E5BB3E7005C8BF0 /* Assets.xcassets */,
@@ -290,6 +293,7 @@
 				E5BA95BB1E628F65008665B8 /* ScanController.swift in Sources */,
 				E5D1032C1E6C3DBB00E95766 /* URLItem.swift in Sources */,
 				E531DCB21E6E820C00A93F80 /* NavigationController.swift in Sources */,
+				E5D898DB1EC0ECB00091A4DE /* DataFinderController.swift in Sources */,
 				E5D103301E6C4AA200E95766 /* LastCell.swift in Sources */,
 				E531DCAE1E6CEB3200A93F80 /* MainViewController.swift in Sources */,
 				E5D103261E6C3B8100E95766 /* URLCell.swift in Sources */,
@@ -448,10 +452,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NJ4VVCSZ7F;
 				INFOPLIST_FILE = URLer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.esri.URLer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -462,10 +469,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = NJ4VVCSZ7F;
 				INFOPLIST_FILE = URLer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.esri.URLer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
