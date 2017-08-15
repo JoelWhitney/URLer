@@ -158,7 +158,7 @@ class ScanController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
                     let attributedString = NSMutableAttributedString(string: urlString)
                     messageLabel.attributedText = attributedString
                     messageLabel.isUserInteractionEnabled = true
-                    if UIApplication.shared.canOpenURL(URL(string: urlString)!) { // only save if app is installed
+                    if UIApplication.shared.canOpenURL(URL(string: urlString ?? "")!) { // only save if app is installed
                         saveIntoRecents(url: URL(string: urlString)!)
                     }
                 } else {

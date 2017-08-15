@@ -24,7 +24,7 @@ class URLItemStore {
             allItems = archivedItems
         } else {
             print("No existing data -- creating random entries!!")
-            for i in 0...4 {
+            for i in 0...5 {
                 let item = URLItem(appIndex: i)
                 allItems.append(item)
             }

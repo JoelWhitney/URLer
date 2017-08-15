@@ -27,7 +27,9 @@
 		<string>arcgis-survey123</string>
 		<string>arcgis-explorer</string>
 		<string>arcgis-navigator</string>
+		<string>arcgis-appstudio-player</string>
 		<string>itms-services</string>
+		<string>arcgis-terzo</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

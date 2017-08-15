@@ -23,7 +23,7 @@ class URLItem: NSObject, NSCoding {
     }
     convenience init(appIndex: Int) {
         let urls = ["arcgis-explorer://?", "arcgis-navigator://?", "arcgis-collector://?",
-                    "arcgis-workforce://?", "arcgis-survey123://?"]
+                    "arcgis-workforce://?", "arcgis-survey123://?", "arcgis-terzo://?"]
         if (appIndex > urls.count - 1) { // should probably just use revolving index so stay within array window
             print("Index is higher than number of items")
             self.init(url: URL(string: urls[0])!)
