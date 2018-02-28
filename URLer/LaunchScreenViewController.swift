@@ -9,13 +9,19 @@
 import UIKit
 import AVFoundation
 
-class MainViewController: UIViewController {
-    // MARK: - variables/constants
-    var captureSession:AVCaptureSession?
-    var videoPreviewLayer:AVCaptureVideoPreviewLayer?
+class LaunchScreenViewController: UIViewController {
+    // MARK: - variables
+    var captureSession: AVCaptureSession?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     
-    // MARK: - class methods
-    func videoPreviewFrame() {
+    // MARK: - lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        videoPreviewFrame()
+    }
+    
+    // MARK: - methods
+    private func videoPreviewFrame() {
         let captureView = UIView()
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
@@ -38,7 +44,8 @@ class MainViewController: UIViewController {
             return
         }
     }
-    func checkCameraPermissions() {  // ADD THIS TO THE BUTTON CLICK TO MAKE SURE ACCEPTED PERMISSONS
+    
+    private func checkCameraPermissions() {  // ADD THIS TO THE BUTTON CLICK TO MAKE SURE ACCEPTED PERMISSONS
         if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) ==  AVAuthorizationStatus.authorized {
             // Already Authorized
             return
@@ -52,16 +59,6 @@ class MainViewController: UIViewController {
                 }
             });
         }
-    }
-    
-    // MARK: view transition overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        videoPreviewFrame()
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

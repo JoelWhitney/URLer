@@ -17,10 +17,6 @@ class DataFinderController: UIViewController, WKNavigationDelegate {
     let progressSpinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
     let progressBar = UIProgressView(progressViewStyle: .bar)
     
-    var itemStore: URLItemStore {
-        let navController = self.navigationController as? NavigationController
-        return navController!.itemStore
-    }
     let supportedIdentifiers = Bundle.main.infoDictionary?["LSApplicationQueriesSchemes"] as? [String] ?? []
     var starting_url = URL(string:"https://ekotest.esri.com/datafinder?app=Explorer")
     //var starting_url = URL(string:"https://appbuilder.esri.com/ios")
@@ -92,14 +88,14 @@ class DataFinderController: UIViewController, WKNavigationDelegate {
     
     func saveIntoRecents(url: URL) {
         var index = 0
-        for item in itemStore.allItems {
+        for item in DataStore.shared.allItems {
             if item.url == url {
-                itemStore.moveItem(fromIndex: index, to: 0)
+                DataStore.shared.moveItem(fromIndex: index, to: 0)
                 return
             }
             index += 1
         }
-        itemStore.addItem(url: url)
+        DataStore.shared.addItem(url: url)
     }
     
     func closeWebview(){

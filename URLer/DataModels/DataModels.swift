@@ -1,11 +1,12 @@
 //
-//  URLItem.swift
+//  DataModels.swift
 //  URLer
 //
-//  Created by Joel Whitney on 3/5/17.
-//  Copyright © 2017 Joel Whitney. All rights reserved.
+//  Created by Joel Whitney on 2/27/18.
+//  Copyright © 2018 Joel Whitney. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class URLItem: NSObject, NSCoding {
@@ -21,6 +22,7 @@ class URLItem: NSObject, NSCoding {
         self.itemKey = UUID().uuidString
         super.init()
     }
+    
     convenience init(appIndex: Int) {
         let urls = ["arcgis-explorer://?", "arcgis-navigator://?", "arcgis-collector://?",
                     "arcgis-workforce://?", "arcgis-survey123://?", "arcgis-terzo://?"]
@@ -31,6 +33,7 @@ class URLItem: NSObject, NSCoding {
         }
         self.init(url: URL(string: urls[appIndex])!)
     }
+    
     required init(coder aDecoder: NSCoder) {
         url = aDecoder.decodeObject(forKey: "url") as! URL
         dateCreated = aDecoder.decodeObject(forKey: "dateCreated") as! Date

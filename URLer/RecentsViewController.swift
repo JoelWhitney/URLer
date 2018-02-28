@@ -10,10 +10,6 @@ import UIKit
 
 class RecentsViewController: UITableViewController {
     // MARK: - variables/constants
-    var itemStore: URLItemStore {
-        let navController = self.navigationController as? NavigationController
-        return navController!.itemStore
-    }
     var alertTextField = UITextField()
     let supportedIdentifiers = Bundle.main.infoDictionary?["LSApplicationQueriesSchemes"] as? [String] ?? []
     
@@ -36,40 +32,40 @@ class RecentsViewController: UITableViewController {
     
     // MARK: - tableview stuff
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemStore.allItems.count + 1
+        return DataStore.shared.allItems.count + 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
-        if indexPath.row < itemStore.allItems.count {
+        if indexPath.row < DataStore.shared.allItems.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "URLCell", for: indexPath) as! URLCell
-            let item = itemStore.allItems[indexPath.row]
+            let item = DataStore.shared.allItems[indexPath.row]
             cell.url.attributedText = NSMutableAttributedString(string: item.url.absoluteString)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LastCell", for: indexPath) as! LastCell
-            cell.lastCellLabel.text = "No more items!  💩"
+            cell.lastCellLabel.text = ""
             return cell
         }
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        itemStore.moveItem(fromIndex: sourceIndexPath.row, to: destinationIndexPath.row)
+        DataStore.shared.moveItem(fromIndex: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        if proposedDestinationIndexPath.row == itemStore.allItems.count {
+        if proposedDestinationIndexPath.row == DataStore.shared.allItems.count {
             return sourceIndexPath
         } else {
             return proposedDestinationIndexPath
         }
     }
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == itemStore.allItems.count {
+        if indexPath.row == DataStore.shared.allItems.count {
             return false
         } else {
             return true
         }
     }
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row == itemStore.allItems.count {
+        if indexPath.row == DataStore.shared.allItems.count {
             return false
         } else {
             return true
@@ -77,7 +73,7 @@ class RecentsViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let item = itemStore.allItems[indexPath.row]
+            let item = DataStore.shared.allItems[indexPath.row]
             let title = "Remove \(item.url.absoluteString)"
             let message = "Are you sure you want to remove this item?"
             
@@ -88,9 +84,9 @@ class RecentsViewController: UITableViewController {
             
             let deleteAction = UIAlertAction(title: "Remove", style: .destructive, handler: {
                 (action) -> Void in
-                print(self.itemStore.allItems.count)
-                self.itemStore.removeItem(item)
-                print(self.itemStore.allItems.count)
+                print(DataStore.shared.allItems.count)
+                DataStore.shared.removeItem(item)
+                print(DataStore.shared.allItems.count)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 tableView.reloadData()
             })
@@ -136,7 +132,7 @@ class RecentsViewController: UITableViewController {
         if !(urlString!.isEmpty), verifyApplicationID(url: urlString!), UIApplication.shared.canOpenURL(URL(string: urlString!)!) {
             // Create a new Item and add it to the store
             let url = URL(string: urlString!)
-            itemStore.addItem(url: url!)
+            DataStore.shared.addItem(url: url!)
             tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 
         } else {
@@ -147,7 +143,7 @@ class RecentsViewController: UITableViewController {
         }
     }
     func handleClearURLs(alertView: UIAlertAction!) {
-        itemStore.removeAllItems()
+        DataStore.shared.removeAllItems()
         tableView.reloadData()
     }
     func verifyApplicationID(url: String) -> Bool {
@@ -179,7 +175,32 @@ class RecentsViewController: UITableViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        itemStore.saveChanges()
+        DataStore.shared.saveChanges()
     }
     
 }
+
+// MARK: - URL Cell
+class URLCell: UITableViewCell {
+    @IBOutlet var url: UITextView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
+
+// MARK: - Last Cell
+class LastCell: UITableViewCell {
+    @IBOutlet var lastCellLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if #available(iOS 10.0, *) {
+            lastCellLabel.adjustsFontForContentSizeCategory = true
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+}
+

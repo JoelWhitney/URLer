@@ -1,5 +1,5 @@
 //
-//  URLItemStore.swift
+//  DataStore.swift
 //  URLer
 //
 //  Created by Joel Whitney on 3/5/17.
@@ -8,9 +8,23 @@
 
 import UIKit
 
-class URLItemStore {
+protocol CurrentItemDelegate {
+    func currentItemUpdated()
+}
+
+class DataStore {
+    
+    static var shared = DataStore()
+
     // MARK: - variables/constants
+    var currentItem: URLItem?  {
+        didSet {
+            print("currentItem has changed")
+            currentItemDelegate?.currentItemUpdated()
+        }
+    }
     var allItems = [URLItem]()
+    var currentItemDelegate: CurrentItemDelegate?
     let itemArchiveURL: URL = {
         let documentsDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = documentsDirectories.first!
@@ -39,10 +53,12 @@ class URLItemStore {
             print("Item removed from itemStore")
         }
     }
+    
     func removeAllItems() {
         allItems = [URLItem]()
         saveChanges()
     }
+    
     func moveItem(fromIndex: Int, to toIndex: Int) {
         if fromIndex == toIndex {
             return
@@ -51,16 +67,19 @@ class URLItemStore {
         allItems.remove(at: fromIndex)
         allItems.insert(movedItem, at: toIndex)
     }
+    
     func addItem(url: URL) {
         print("Adding \(url) to URLItemStore")
         let newItem = URLItem(url: url)
         allItems.insert(newItem, at: 0)
     }
+    
     @discardableResult func createItem(url: URL) -> URLItem {
         let newItem = URLItem(url: url)
         allItems.append(newItem)
         return newItem
     }
+    
     func saveChanges() -> Bool {
         print("Saving items to: \(itemArchiveURL.path)")
         return NSKeyedArchiver.archiveRootObject(allItems, toFile: itemArchiveURL.path)
