@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yT6-sW-5Tg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sKF-va-K49">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -46,9 +46,6 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="scan_controller_bttn"/>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="sKF-va-K49" kind="presentation" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="l72-Cv-UBk"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -84,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="peD-9d-Eo6" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-178" y="57"/>
+            <point key="canvasLocation" x="-612" y="-172"/>
         </scene>
         <!--About Controller-->
         <scene sceneID="7gg-Ns-wSS">
@@ -409,12 +406,6 @@
                             <view opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-iG-olu">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan ArcGIS URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-Lx-djl">
-                                        <rect key="frame" x="8" y="30" width="359" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqb-4g-uB4">
                                         <rect key="frame" x="170" y="10" width="35" height="5"/>
                                         <color key="backgroundColor" red="0.74901960779999999" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -434,16 +425,26 @@
                                         <color key="textColor" red="1" green="0.34895753860000001" blue="0.16649934650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-tc-lQu">
+                                        <rect key="frame" x="50" y="30" width="275" height="40"/>
+                                        <color key="backgroundColor" red="0.8357788706" green="0.8357788706" blue="0.8357788706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="5o9-o7-TI1"/>
+                                        </constraints>
+                                        <state key="normal" title="Scan QR Code with ArcGIS URL">
+                                            <color key="titleColor" red="0.24333269216723402" green="0.24574192674314721" blue="0.24574192674314721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.32545113563537598" green="0.32551270723342896" blue="0.32544726133346558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="iqb-4g-uB4" firstAttribute="centerX" secondItem="jQu-iG-olu" secondAttribute="centerX" id="0jY-Od-oaj"/>
+                                    <constraint firstItem="bZC-tc-lQu" firstAttribute="leading" secondItem="jQu-iG-olu" secondAttribute="leading" constant="50" id="3Su-b0-3PE"/>
+                                    <constraint firstItem="bZC-tc-lQu" firstAttribute="top" secondItem="iqb-4g-uB4" secondAttribute="bottom" constant="15" id="HFh-Uc-ABG"/>
+                                    <constraint firstAttribute="trailing" secondItem="bZC-tc-lQu" secondAttribute="trailing" constant="50" id="RGA-YN-Hin"/>
                                     <constraint firstAttribute="height" constant="85" id="eZf-2l-FOz"/>
                                     <constraint firstAttribute="bottom" secondItem="4a8-wv-ho3" secondAttribute="bottom" constant="5" id="i7f-3M-7iZ"/>
                                     <constraint firstItem="iqb-4g-uB4" firstAttribute="top" secondItem="jQu-iG-olu" secondAttribute="top" constant="10" id="jVN-Y9-4qi"/>
-                                    <constraint firstAttribute="trailing" secondItem="b7l-Lx-djl" secondAttribute="trailing" constant="8" id="lFJ-Ml-GNk"/>
-                                    <constraint firstItem="b7l-Lx-djl" firstAttribute="top" secondItem="jQu-iG-olu" secondAttribute="top" constant="30" id="m5T-Qn-CNg"/>
-                                    <constraint firstItem="b7l-Lx-djl" firstAttribute="leading" secondItem="jQu-iG-olu" secondAttribute="leading" constant="8" id="mcK-Zz-GKw"/>
                                     <constraint firstItem="4a8-wv-ho3" firstAttribute="centerX" secondItem="jQu-iG-olu" secondAttribute="centerX" id="vfC-Za-Dxh"/>
                                 </constraints>
                             </view>
@@ -469,6 +470,7 @@
                     <connections>
                         <outlet property="badURLLabel" destination="4a8-wv-ho3" id="3Nx-Nr-5Qs"/>
                         <outlet property="badURLTextView" destination="9Ol-hg-Fj8" id="sl6-gj-oal"/>
+                        <outlet property="openURLButton" destination="bZC-tc-lQu" id="j2Q-Qx-Nqd"/>
                         <outlet property="urlTextView" destination="hPa-e5-ZIQ" id="70o-af-EaF"/>
                     </connections>
                 </viewController>

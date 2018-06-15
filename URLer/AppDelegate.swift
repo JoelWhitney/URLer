@@ -18,24 +18,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        print("Continue User Activity called: ")
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            let url = userActivity.webpageURL!
+            print(url.absoluteString)
+            //handle url and open whatever page you want to open.
+            let alertController = UIAlertController(title: "URLer Called Upon", message: url.absoluteString ?? "", preferredStyle: .alert)
+            let dismissAlert = UIAlertAction(title: "Dismiss", style: .default, handler: { UIAlertAction in
+                if let presentedVC = (self.window?.rootViewController?.presentedViewController as? ScanController) {
+                    presentedVC.refreshScanControllerState(clearCurrentItem: false)
+                }
+            })
+            
+            alertController.addAction(dismissAlert)
+            
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        }
+        return true
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-        let message: String?
-        
-        // Handle Url scheme
-        if let appLinkMessage = url.host?.removingPercentEncoding {
-            message = appLinkMessage
+        var message = ""
+        // handle query parameters
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        if let queryItems = components.queryItems {
+            // display each queryItem in alert message
+            for item in queryItems {
+                message += "\(item.name)=\(String(describing: item.value!))\n"
+            }
         } else {
             message = "Opened without message"
         }
-        let alertController = UIAlertController(title: "URLer Called Upon", message: message!, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
-        
-        window?.rootViewController?.presentedViewController?.present(alertController, animated: true, completion: {
+        // make alert
+        let alertController = UIAlertController(title: "URLer Called Upon", message: message, preferredStyle: .alert)
+        let dismissAlert = UIAlertAction(title: "Dismiss", style: .default, handler: { UIAlertAction in
             if let presentedVC = (self.window?.rootViewController?.presentedViewController as? ScanController) {
                 presentedVC.refreshScanControllerState(clearCurrentItem: false)
             }
         })
+        alertController.addAction(dismissAlert)
         
+        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
         return true
     }
     
@@ -56,7 +80,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh therotte user interface.
+        if let navController = self.window?.rootViewController as? UINavigationController, let scanController = (navController.presentedViewController as? ScanController) {
+            
+            guard DataStore.shared.currentItem != nil else { return }
+            
+            scanController.refreshScanControllerState(clearCurrentItem: true)
+        }
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
