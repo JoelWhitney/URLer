@@ -66,12 +66,14 @@ class DataStore {
         let movedItem = allItems[fromIndex]
         allItems.remove(at: fromIndex)
         allItems.insert(movedItem, at: toIndex)
+        saveChanges()
     }
     
     func addItem(url: URL) {
         print("Adding \(url) to URLItemStore")
         let newItem = URLItem(url: url)
         allItems.insert(newItem, at: 0)
+        saveChanges()
     }
     
     @discardableResult func createItem(url: URL) -> URLItem {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E31673CA003E30A84EC6F19 /* Pods_URLer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49429E672EBA5D675CFC5F21 /* Pods_URLer.framework */; };
+		3542F3BA9EC6D04CFFED2407 /* Pods_URLerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE1CC27F5322722DDAD11FD /* Pods_URLerTests.framework */; };
+		695D7BBBCB746E2494D00BC2 /* Pods_URLerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2040B81D306BC90BC6805CCD /* Pods_URLerUITests.framework */; };
 		E52069871E5BB3E7005C8BF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */; };
 		E520698C1E5BB3E7005C8BF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E520698A1E5BB3E7005C8BF0 /* Main.storyboard */; };
 		E520698E1E5BB3E7005C8BF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E520698D1E5BB3E7005C8BF0 /* Assets.xcassets */; };
@@ -45,6 +48,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09CAAD0E70957D91963A496E /* Pods-URLerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-URLerTests/Pods-URLerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2040B81D306BC90BC6805CCD /* Pods_URLerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		379E1546DB3A227BFB8ACC4E /* Pods-URLer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLer.release.xcconfig"; path = "Pods/Target Support Files/Pods-URLer/Pods-URLer.release.xcconfig"; sourceTree = "<group>"; };
+		49429E672EBA5D675CFC5F21 /* Pods_URLer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BE1CC27F5322722DDAD11FD /* Pods_URLerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		865960682D75513C8DBF34E6 /* Pods-URLerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-URLerUITests/Pods-URLerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8C3200FB3889FD6B07B5AA54 /* Pods-URLer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-URLer/Pods-URLer.debug.xcconfig"; sourceTree = "<group>"; };
+		B6E2B98298FEDC1B2256F8E3 /* Pods-URLerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-URLerUITests/Pods-URLerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4698400596D20CCC15B2207 /* Pods-URLerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-URLerTests/Pods-URLerTests.release.xcconfig"; sourceTree = "<group>"; };
 		E52069831E5BB3E7005C8BF0 /* URLer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52069861E5BB3E7005C8BF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E520698B1E5BB3E7005C8BF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E31673CA003E30A84EC6F19 /* Pods_URLer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3542F3BA9EC6D04CFFED2407 /* Pods_URLerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,12 +104,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				695D7BBBCB746E2494D00BC2 /* Pods_URLerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1229D2CA60261B0F50D466D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49429E672EBA5D675CFC5F21 /* Pods_URLer.framework */,
+				6BE1CC27F5322722DDAD11FD /* Pods_URLerTests.framework */,
+				2040B81D306BC90BC6805CCD /* Pods_URLerUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4512CBB979C4BE8195AED29C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C3200FB3889FD6B07B5AA54 /* Pods-URLer.debug.xcconfig */,
+				379E1546DB3A227BFB8ACC4E /* Pods-URLer.release.xcconfig */,
+				09CAAD0E70957D91963A496E /* Pods-URLerTests.debug.xcconfig */,
+				E4698400596D20CCC15B2207 /* Pods-URLerTests.release.xcconfig */,
+				B6E2B98298FEDC1B2256F8E3 /* Pods-URLerUITests.debug.xcconfig */,
+				865960682D75513C8DBF34E6 /* Pods-URLerUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E520697A1E5BB3E7005C8BF0 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +141,8 @@
 				E520699A1E5BB3E7005C8BF0 /* URLerTests */,
 				E52069A51E5BB3E7005C8BF0 /* URLerUITests */,
 				E52069841E5BB3E7005C8BF0 /* Products */,
+				4512CBB979C4BE8195AED29C /* Pods */,
+				1229D2CA60261B0F50D466D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,9 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E52069AB1E5BB3E7005C8BF0 /* Build configuration list for PBXNativeTarget "URLer" */;
 			buildPhases = (
+				D8D48DDAA2D853D68432A4F7 /* [CP] Check Pods Manifest.lock */,
 				E520697F1E5BB3E7005C8BF0 /* Sources */,
 				E52069801E5BB3E7005C8BF0 /* Frameworks */,
 				E52069811E5BB3E7005C8BF0 /* Resources */,
+				A5C7F6DFD3DD1D7C1C9B0648 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -206,6 +248,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E52069AE1E5BB3E7005C8BF0 /* Build configuration list for PBXNativeTarget "URLerTests" */;
 			buildPhases = (
+				0F8E3A9FE630AE211F70A755 /* [CP] Check Pods Manifest.lock */,
 				E52069931E5BB3E7005C8BF0 /* Sources */,
 				E52069941E5BB3E7005C8BF0 /* Frameworks */,
 				E52069951E5BB3E7005C8BF0 /* Resources */,
@@ -224,6 +267,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E52069B11E5BB3E7005C8BF0 /* Build configuration list for PBXNativeTarget "URLerUITests" */;
 			buildPhases = (
+				9B2D158F20C5CF66B08F2500 /* [CP] Check Pods Manifest.lock */,
 				E520699E1E5BB3E7005C8BF0 /* Sources */,
 				E520699F1E5BB3E7005C8BF0 /* Frameworks */,
 				E52069A01E5BB3E7005C8BF0 /* Resources */,
@@ -311,6 +355,97 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F8E3A9FE630AE211F70A755 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-URLerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B2D158F20C5CF66B08F2500 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-URLerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5C7F6DFD3DD1D7C1C9B0648 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-URLer/Pods-URLer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ShowTime/ShowTime.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ShowTime.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-URLer/Pods-URLer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8D48DDAA2D853D68432A4F7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-URLer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E520697F1E5BB3E7005C8BF0 /* Sources */ = {
@@ -479,13 +614,14 @@
 		};
 		E52069AC1E5BB3E7005C8BF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C3200FB3889FD6B07B5AA54 /* Pods-URLer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NJ4VVCSZ7F;
 				INFOPLIST_FILE = "$(SRCROOT)/URLer/Utility/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.esri.URLer;
@@ -498,13 +634,14 @@
 		};
 		E52069AD1E5BB3E7005C8BF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 379E1546DB3A227BFB8ACC4E /* Pods-URLer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NJ4VVCSZ7F;
 				INFOPLIST_FILE = "$(SRCROOT)/URLer/Utility/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.esri.URLer;
@@ -517,6 +654,7 @@
 		};
 		E52069AF1E5BB3E7005C8BF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09CAAD0E70957D91963A496E /* Pods-URLerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -531,6 +669,7 @@
 		};
 		E52069B01E5BB3E7005C8BF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4698400596D20CCC15B2207 /* Pods-URLerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -545,6 +684,7 @@
 		};
 		E52069B21E5BB3E7005C8BF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6E2B98298FEDC1B2256F8E3 /* Pods-URLerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = URLerUITests/Info.plist;
@@ -558,6 +698,7 @@
 		};
 		E52069B31E5BB3E7005C8BF0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 865960682D75513C8DBF34E6 /* Pods-URLerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = URLerUITests/Info.plist;

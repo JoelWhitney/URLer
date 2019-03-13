@@ -116,12 +116,16 @@ class SlidingPanelViewController: UIViewController {
         switch panelPosition {
         case .hidden:
             slidingPanelTopConstraint.constant = 0
+            contentScrollView?.isScrollEnabled = false
         case .summary:
             slidingPanelTopConstraint.constant = slidingPanelSummaryHeight
+            contentScrollView?.isScrollEnabled = false
         case .partial:
             slidingPanelTopConstraint.constant = slidingPanelPartialHeight
+            contentScrollView?.isScrollEnabled = false
         case .full:
             slidingPanelTopConstraint.constant = slidingPanelFullHeight
+            contentScrollView?.isScrollEnabled = true
         }
     }
     

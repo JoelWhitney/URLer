@@ -37,7 +37,7 @@ class RecentsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
         if indexPath.row < DataStore.shared.allItems.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "URLCell", for: indexPath) as! URLCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "URLCell", for: indexPath) as! URLRecentCell
             let item = DataStore.shared.allItems[indexPath.row]
             cell.url.attributedText = NSMutableAttributedString(string: item.url.absoluteString)
             return cell
@@ -181,7 +181,7 @@ class RecentsViewController: UITableViewController {
 }
 
 // MARK: - URL Cell
-class URLCell: UITableViewCell {
+class URLRecentCell: UITableViewCell {
     @IBOutlet var url: UITextView!
     
     override func awakeFromNib() {
